@@ -39,6 +39,21 @@
                 <br />
             </div>
         }
+        @using (Html.BeginForm("SetSessionMessage", "Home", FormMethod.Get, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div>
+                <h4>session_message</h4>
+                <h5>
+                    Legg inn en beskjed som gjøres tilgjengelig for OIDC-autentiseringssesjonen.
+                </h5>
+                @{ byte[] value = null; string text = Context.Session?.TryGetValue("session_message", out value) == true ? System.Text.Encoding.UTF8.GetString(value) : "";
+                    @Html.Label("session_message");
+                    <input id="session_message" name="session_message" type="text" value="@text" />
+                }
+                <input type="submit" value="Set session_message" />
+                <br />
+            </div>
+        }
         }
         else
         {

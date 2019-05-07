@@ -56,6 +56,17 @@ namespace BankIdAspNetCore2Demo.Controllers
             return View();
         }
 
+        /*
+          Store a message that will be picked up by AccountController::SignIn
+          and made available to the OIDC authentication session.
+         */
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult SetSessionMessage(string session_message) {
+            HttpContext.Session.SetString("session_message", session_message ?? "");
+            return RedirectToAction("Index", "Home");
+        }
+
         [AllowAnonymous]
         [HttpGet]
         public ActionResult SetLoginHint(string login_hint)

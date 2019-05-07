@@ -21,6 +21,7 @@ namespace BankIdAspNetCore2Demo.Controllers
             new List<string> {
                 "login_hint",
                 "ui_locales",
+                "session_message",
             }
             .ForEach(key => {
                     string value = HttpContext.Session?.GetString(key);
