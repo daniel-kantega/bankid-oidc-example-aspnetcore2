@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BankIdAspNetCore2Demo.Controllers
 {
@@ -17,16 +18,18 @@ namespace BankIdAspNetCore2Demo.Controllers
 
             // The redirect to OpenID Connect server has its own session. 
             // Put session parameters into the AuthenticationProperties to be picked up by our event handler.
-            string value = HttpContext.Session?.GetString("login_hint");
-            if (!string.IsNullOrEmpty(value))
-            {
-                authProperties.Items.Add("login_hint", value);
+            new List<string> {
+                "login_hint",
+                "ui_locales",
             }
-            value = HttpContext.Session?.GetString("ui_locales");
-            if (!string.IsNullOrEmpty(value))
-            {
-                authProperties.Items.Add("ui_locales", value);
-            }
+            .ForEach(key => {
+                    string value = HttpContext.Session?.GetString(key);
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        authProperties.Items.Add(key, value);
+                    }
+                });
+
             var result = Challenge(authProperties, OpenIdConnectDefaults.AuthenticationScheme);
             return result;
         }
