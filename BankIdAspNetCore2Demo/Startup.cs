@@ -181,8 +181,8 @@ namespace BankIdAspNetCore2Demo
             }
 
             app.UseStaticFiles();
-            app.UseAuthentication();
             app.UseSession();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
