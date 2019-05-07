@@ -145,6 +145,14 @@ namespace BankIdAspNetCore2Demo
                     },
                     OnTokenResponseReceived = context =>
                     {
+                        string session_message;
+                        context.Properties.Items.TryGetValue("session_message", out session_message);
+
+                        string token_handler_message = string.IsNullOrEmpty(session_message)
+                            ? "session_message was not set before authentication"
+                            : "session_message was '" + session_message + "'";
+                        context.HttpContext.Session.SetString("OnTokenResponseReceivedMsg", token_handler_message);
+
                         // Possibility to check token response: var temp = context.TokenEndpointResponse;
                         return Task.FromResult(0);
                     }

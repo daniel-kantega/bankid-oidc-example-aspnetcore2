@@ -20,6 +20,8 @@ namespace BankIdAspNetCore2Demo.Controllers
                 string idToken = await HttpContext.GetTokenAsync("id_token");
                 // Prepare for display.
                 ViewBag.id_token = new JwtSecurityToken(idToken).ToString();
+                string ontoken_message = HttpContext.Session.GetString("OnTokenResponseReceivedMsg");
+                ViewBag.ontoken_message = ontoken_message;
             }
             else
             {
