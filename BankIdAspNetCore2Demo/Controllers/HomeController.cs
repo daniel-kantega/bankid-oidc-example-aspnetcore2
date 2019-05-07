@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace BankIdAspNetCore2Demo.Controllers
@@ -29,7 +28,7 @@ namespace BankIdAspNetCore2Demo.Controllers
 
                 if (string.IsNullOrEmpty(value))
                 {
-                    HttpContext.Session.SetString("login_hint", " ");
+                    HttpContext.Session.SetString("login_hint", "");
                 }
 
                 value = HttpContext.Session.GetString("ui_locales");
@@ -73,14 +72,14 @@ namespace BankIdAspNetCore2Demo.Controllers
         [HttpGet]
         public ActionResult SetLoginHint(string login_hint)
         {
-            HttpContext.Session.SetString("login_hint", login_hint ?? " ");
+            HttpContext.Session.SetString("login_hint", login_hint ?? "");
             return RedirectToAction("Index", "Home");
         }
         [AllowAnonymous]
         [HttpGet]
         public ActionResult SetUiLocales(string ui_locales)
         {
-            HttpContext.Session.SetString("ui_locales", ui_locales ?? " ");
+            HttpContext.Session.SetString("ui_locales", ui_locales ?? "");
             return RedirectToAction("Index", "Home");
         }
 

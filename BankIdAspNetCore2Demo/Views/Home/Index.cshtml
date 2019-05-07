@@ -12,7 +12,7 @@
                 <h5>
                     benyttes til å velge språk i BankID-dialogene. Foreløpig er det bare tre valg: 'no', 'en' og tomt (oppsett fra nettleser).<br />
                 </h5>
-                @{ byte[] value = null; string text = Context.Session?.TryGetValue("ui_locales", out value) == true ? System.Text.Encoding.UTF8.GetString(value) : " ";
+                @{ byte[] value = null; string text = Context.Session?.TryGetValue("ui_locales", out value) == true ? System.Text.Encoding.UTF8.GetString(value) : "";
                     @Html.Label("ui_locales", "ui_locales (Eksempel: 'no', 'en' eller ingen tekst): ");
                     <input id="ui_locales" name="ui_locales" type="text" value="@text" />
                 }
@@ -31,7 +31,7 @@
                     BIM - står for BankID på mobil.<br />
                     XID - er BankID xID autentisering.
                 </h5>
-                @{ byte[] value = null; string text = Context.Session?.TryGetValue("login_hint", out value) == true ? System.Text.Encoding.UTF8.GetString(value) : " ";
+                @{ byte[] value = null; string text = Context.Session?.TryGetValue("login_hint", out value) == true ? System.Text.Encoding.UTF8.GetString(value) : "";
                     @Html.Label("Oppgi eventuelt login_hint", "login_hint (Eksempel: 'BIM:48037464:310842', 'BID:09038000010' eller bare 'BID'): ");
                     <input id="login_hint" name="login_hint" type="text" value="@text" />
                 }
